@@ -2,7 +2,7 @@
 #include <string.h>
 #include <math.h>
 
-//#include <uxhw.h>
+#include <uxhw.h>
 
 #define MODEL_DRY_AIR_CONSTANT (287.05)
 
@@ -48,9 +48,21 @@ void model_update(
 	double pressure_absolute_nominal,
 	double pressure_pitot_nominal
 	) {
-	ins->air_temperature = air_temperature_nominal; // TODO: read sensor here
-	ins->pressure_absolute = pressure_absolute_nominal; // TODO: read sensor here
-	ins->pressure_pitot = pressure_pitot_nominal; // TODO: read sensor here
+
+	ins->air_temperature = UxHwDoubleUniformDist(
+		air_temperature_nominal * (1.0 - ins->tolerance_air_temperature),
+		air_temperature_nominal * (1.0 - ins->tolerance_air_temperature)
+	);
+
+	ins->pressure_absolute = UxHwDoubleUniformDist(
+		pressure_absolute_nominal * (1.0 - ins->tolerance_pressure),
+		pressure_absolute_nominal * (1.0 - ins->tolerance_pressure)
+	);
+
+	ins->pressure_pitot = UxHwDoubleUniformDist(
+		pressure_pitot_nominal * (1.0 - ins->tolerance_pressure),
+		pressure_pitot_nominal * (1.0 - ins->tolerance_pressure)
+	);
 
 	ins->air_density = ins->pressure_absolute / (MODEL_DRY_AIR_CONSTANT * ins->air_temperature);
 	ins->air_speed = sqrt((2.0 * (ins->pressure_pitot - ins->pressure_absolute)) / ins->air_density);
