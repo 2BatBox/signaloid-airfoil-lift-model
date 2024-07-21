@@ -51,17 +51,17 @@ void model_update(
 
 	ins->air_temperature = UxHwDoubleUniformDist(
 		air_temperature_nominal * (1.0 - ins->tolerance_air_temperature),
-		air_temperature_nominal * (1.0 - ins->tolerance_air_temperature)
+		air_temperature_nominal * (1.0 + ins->tolerance_air_temperature)
 	);
 
 	ins->pressure_absolute = UxHwDoubleUniformDist(
 		pressure_absolute_nominal * (1.0 - ins->tolerance_pressure),
-		pressure_absolute_nominal * (1.0 - ins->tolerance_pressure)
+		pressure_absolute_nominal * (1.0 + ins->tolerance_pressure)
 	);
 
 	ins->pressure_pitot = UxHwDoubleUniformDist(
 		pressure_pitot_nominal * (1.0 - ins->tolerance_pressure),
-		pressure_pitot_nominal * (1.0 - ins->tolerance_pressure)
+		pressure_pitot_nominal * (1.0 + ins->tolerance_pressure)
 	);
 
 	ins->air_density = ins->pressure_absolute / (MODEL_DRY_AIR_CONSTANT * ins->air_temperature);
