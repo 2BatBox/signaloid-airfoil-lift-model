@@ -71,10 +71,6 @@ void model_update(
 }
 
 void model_dump(const Medel_s* ins) {
-//	printf("airfiol_base_area       : %lf(Meter^2)\n", ins->airfiol_base_area);
-//	printf("air_temperature         : %lf(Kelvin) %lf (Celsius)\n", ins->air_temperature, ins->air_temperature - 273.15);
-//	printf("pressure_absolute       : %lf(Pascal)\n", ins->pressure_absolute);
-//	printf("pressure_pitot          : %lf(Pascal)\n", ins->pressure_pitot);
 	printf("air_density             : %lf(Kg/Meter^3)\n", ins->air_density);
 	printf("air_speed               : %lf(Meter/Second) %lf(Knots)\n", ins->air_speed, ins->air_speed * 1.94384);
 	printf("airfoil_pressure_delta  : %lf(Pascal) \n", ins->airfoil_pressure_delta);
@@ -107,19 +103,6 @@ int main(int argc, char**  argv) {
 	printf("Cesna 172, cruise speed, altitude is close to the absolute ceiling (4000 meters.) \n");
 	model_update(&cesna_172, 270, 62500, 63800);
 	model_dump(&cesna_172);
-
-//	a = UxHwDoubleUniformDist(0.5, 1.0);
-//	printf("a = %lf\n", a);
-//
-//	b = UxHwDoubleUniformDist(10.0, 20.0);
-//	printf("b = %lf\n", b);
-//
-//	c = (a+b)/(a-b);
-//	printf("c = %lf\n", c);
-
-#ifdef DEBUG
-	printf("debug message\n");
-#endif
 
 	return 0;
 }
