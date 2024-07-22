@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <math.h>
+#include <stdlib.h>
 
 #include <uxhw.h>
 
@@ -31,10 +32,10 @@ typedef struct {
 
 void model_init(
 	Medel_s* ins,
-	double airfiol_base_area,
-	double airfiol_geometry,
-	double tolerance_air_temperature,
-	double tolerance_pressure
+	const double airfiol_base_area,
+	const double airfiol_geometry,
+	const double tolerance_air_temperature,
+	const double tolerance_pressure
 ) {
 	ins->airfiol_base_area = airfiol_base_area;
 	ins->airfiol_geometry = (airfiol_geometry * airfiol_geometry - 1.0);
@@ -44,9 +45,9 @@ void model_init(
 
 void model_update(
 	Medel_s* ins,
-	double air_temperature_nominal,
-	double pressure_absolute_nominal,
-	double pressure_pitot_nominal
+	const double air_temperature_nominal,
+	const double pressure_absolute_nominal,
+	const double pressure_pitot_nominal
 	) {
 
 	ins->air_temperature = UxHwDoubleUniformDist(
@@ -104,6 +105,6 @@ int main(int argc, char**  argv) {
 	model_update(&cesna_172, 270, 62500, 63800);
 	model_dump(&cesna_172);
 
-	return 0;
+	return EXIT_SUCCESS;
 }
 
