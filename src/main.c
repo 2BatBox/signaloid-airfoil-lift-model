@@ -6,6 +6,8 @@
 #include <uxhw.h>
 
 #define MODEL_DRY_AIR_CONSTANT (287.05)
+#define MODEL_MS_TO_KNOTS (1.94384)
+#define MODEL_NEWTON_TO_KG (0.101972)
 
 typedef struct {
 
@@ -73,9 +75,9 @@ void model_update(
 
 void model_dump(const Medel_s* ins) {
 	printf("air_density             : %lf(Kg/Meter^3)\n", ins->air_density);
-	printf("air_speed               : %lf(Meter/Second) %lf(Knots)\n", ins->air_speed, ins->air_speed * 1.94384);
+	printf("air_speed               : %lf(Meter/Second) %lf(Knots)\n", ins->air_speed, ins->air_speed * MODEL_MS_TO_KNOTS);
 	printf("airfoil_pressure_delta  : %lf(Pascal) \n", ins->airfoil_pressure_delta);
-	printf("lift_force              : %lf(Newton) %lf(Kg)\n", ins->lift_force, ins->lift_force * 0.101972);
+	printf("lift_force              : %lf(Newton) %lf(Kg)\n", ins->lift_force, ins->lift_force * MODEL_NEWTON_TO_KG);
 }
 
 int main(int argc, char**  argv) {
